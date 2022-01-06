@@ -4,11 +4,13 @@ import './App.css';
 import Layout from './components/Layout/Layout';
 import {ChakraProvider} from "@chakra-ui/react";
 import theme from "./theme/theme";
+import Output from "./components/Output/Output";
 
 function App() {
   return (
       <ChakraProvider theme={theme}>
        <Layout/>
+       <Output/>
       </ChakraProvider>
   );
 }
