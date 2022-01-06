@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 export const useForm = (initial = {}) => {
-    const [formValues, setInputs] = useState({});
+    const [formValues, setInputs] = useState(initial);
     const handleChange = (e : React.FormEvent<HTMLInputElement>) => {
         const {value: userValue, name, type, files, defaultValue} = e.currentTarget;
 
@@ -41,10 +41,6 @@ export const useForm = (initial = {}) => {
         const blankObj = Object.fromEntries(blankArr);
         setInputs(blankObj);
     };
-
-    useEffect(() => {
-
-    }, []);
 
     return {formValues, handleChange, resetForm, clearForm};
 };

@@ -12,7 +12,6 @@ const inputConfig = [
         displayName: 'Host',
         defaultValue: '',
         type: 'text',
-        value: 'Host',
         helperText: '[something].github.com',
         placeholder: 'personal.github.com',
     },
@@ -21,7 +20,6 @@ const inputConfig = [
         displayName: 'User',
         defaultValue: '',
         type: 'text',
-        value: 'User',
         helperText: 'Just put git here. Does not have to be unique',
         placeholder: 'git',
     },
@@ -30,7 +28,6 @@ const inputConfig = [
         displayName: 'Hostname',
         defaultValue: '',
         type: 'text',
-        value: 'Hostname',
         helperText: 'Just git',
         placeholder: 'github.com',
     },
@@ -39,7 +36,6 @@ const inputConfig = [
         displayName: 'IdentityFile',
         defaultValue: '',
         type: 'text',
-        value: 'IdentityFile',
         helperText: 'The filename of the SSH key',
         placeholder: 'github_personal',
     },
@@ -48,14 +44,12 @@ const inputConfig = [
 const defaultInputs = {};
 inputConfig.forEach((input) => {
     // @ts-ignore
-    defaultInputs[input.value] = input.value;
-    // @ts-ignore
-    defaultInputs[input.defaultValue] = input.defaultValue;
-     // @ts-ignore
-    defaultInputs[input.placeholder] = input.placeholder;
+    defaultInputs[input.name] = '';
 });
 
 const HostFile: FC<{ message?: string, handleSubmit: Function }> = ({handleSubmit}) => {
+
+console.log({defaultInputs})
 
     const {formValues, handleChange} = useForm(defaultInputs);
 
@@ -72,19 +66,18 @@ const HostFile: FC<{ message?: string, handleSubmit: Function }> = ({handleSubmi
                         direction={'column'}
                        >
                            {inputConfig.map((item) => {
-                               const {name = '', value: inputValue, defaultValue, placeholder} = item;
+                               const {name = '', placeholder} = item;
                                // @ts-ignore
-                               const value = formValues[inputValue];
+                               const value = formValues[name];
                                return (
                                    <FormControl key={item.name}>
-                                       <FormLabel htmlFor={item.name}>{item.value}</FormLabel>
+                                       <FormLabel htmlFor={item.name}>{item.displayName}</FormLabel>
                                        <Input
                                            name={name}
                                            id='host'
                                            type={item.type}
                                            value={value}
                                            onChange={handleChange}
-                                           defaultValue={defaultValue}
                                            placeholder={placeholder}
                                        />
                                        <FormHelperText>{item.helperText}</FormHelperText>

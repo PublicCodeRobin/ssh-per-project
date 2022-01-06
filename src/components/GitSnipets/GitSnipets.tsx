@@ -30,6 +30,8 @@ inputConfig.forEach((input) => {
 
 const GitSnippets: FC<{ message?: string, handleSubmit: Function }> = ({handleSubmit}) => {
 
+console.log(defaultInputs)
+
     const {formValues, handleChange} = useForm(defaultInputs);
 
     return (
@@ -54,11 +56,9 @@ const GitSnippets: FC<{ message?: string, handleSubmit: Function }> = ({handleSu
                                         <FormLabel htmlFor={item.name}>{item.value}</FormLabel>
                                         <Input
                                             name={name}
-                                            id='host'
                                             type={item.type}
-                                            value={value}
                                             onChange={handleChange}
-                                            defaultValue={defaultValue}
+                                            value={defaultValue}
                                             placeholder={placeholder}
                                         />
                                         <FormHelperText>{item.helperText}</FormHelperText>
