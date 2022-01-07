@@ -1,45 +1,63 @@
 import React, {FC} from 'react';
 import PropTypes from 'prop-types';
 import {Box, FormControl, FormLabel, FormHelperText, Input, Button, Divider, VStack, Flex} from '@chakra-ui/react';
-import {WarningIcon} from '@chakra-ui/icons';
 import {useForm} from "../../hooks/useForm";
-import {EventHandler} from "framer-motion/types/events/types";
 import Form from "../Form/Form";
 
 const inputConfig = [
+    {
+        name: 'username',
+        displayName: 'Username',
+        defaultValue: '',
+        type: 'text',
+        value: '',
+        helperText: 'Username on GitHub',
+        placeholder: 'MyUserName_1993',
+    },
+    {
+        name: 'email',
+        displayName: 'Email',
+        defaultValue: '',
+        type: 'text',
+        value: '',
+        helperText: 'email you use on GitHub',
+        placeholder: 'your_email@example.com',
+    },
     {
         name: 'repository',
         displayName: 'Repository',
         defaultValue: '',
         type: 'text',
         value: '',
-        helperText: '[something].git',
-        placeholder: 'personal.github.com',
+        helperText: 'the Git repository you want to push to (.git has to be added)',
+        placeholder: 'myrepo.git',
+    },
+    {
+        name: 'remote',
+        displayName: 'Remote name',
+        defaultValue: '',
+        type: 'text',
+        value: '',
+        helperText: 'how do you want to call the remote (mostly origin)',
+        placeholder: 'origin',
     },
 ];
 
 const defaultInputs = {};
 inputConfig.forEach((input) => {
     // @ts-ignore
-    defaultInputs[input.value] = input.value;
-    // @ts-ignore
-    defaultInputs[input.defaultValue] = input.defaultValue;
-    // @ts-ignore
-    defaultInputs[input.placeholder] = input.placeholder;
+    defaultInputs[input.name] = '';
 });
 
 const GitSnippets: FC<{ message?: string, handleSubmit: Function }> = ({handleSubmit}) => {
 
-console.log(defaultInputs)
+
 
     const {formValues, handleChange} = useForm(defaultInputs);
+    console.log({formValues})
 
     return (
-        <Box
-            w={'95%'}
-            maxW={'1200px'}
-            mx={'auto'}
-        >
+        <Box>
             <Form onSubmit={(e) => handleSubmit(e, formValues)}>
                 <Flex spacing={3} gap={'80px'} direction={'column'}>
                     <fieldset>
@@ -48,36 +66,25 @@ console.log(defaultInputs)
                             direction={'column'}
                         >
                             {inputConfig.map((item) => {
-                                const {name = '', value: inputValue, defaultValue, placeholder} = item;
+                                const {name = '', defaultValue, placeholder} = item;
                                 // @ts-ignore
-                                const value = formValues[inputValue];
+                                const value = formValues[name];
                                 return (
                                     <FormControl key={item.name}>
-                                        <FormLabel htmlFor={item.name}>{item.value}</FormLabel>
+                                        <FormLabel htmlFor={item.name}>{item.displayName}</FormLabel>
                                         <Input
                                             name={name}
                                             type={item.type}
                                             onChange={handleChange}
-                                            value={defaultValue}
+                                            value={value}
                                             placeholder={placeholder}
                                         />
                                         <FormHelperText>{item.helperText}</FormHelperText>
                                     </FormControl>
                                 )
                             })}
-                            <Button type={'submit'}>Snippets to add remote to git</Button>
+                            <Button type={'submit'}>Get snippets to add remote to git</Button>
                         </Flex>
-                    </fieldset>
-                    <fieldset>
-                        <FormControl>
-                            <FormLabel htmlFor={'name'}>{'Repository'}</FormLabel>
-                            <Input
-                                name={'repository'}
-                                id='host'
-                                defaultValue={'oke'}
-                            />
-                            <FormHelperText>{'repository name: <repo_name>.git'}</FormHelperText>
-                        </FormControl>
                     </fieldset>
                 </Flex>
             </Form>

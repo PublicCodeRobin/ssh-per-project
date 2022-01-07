@@ -3,14 +3,11 @@ import PropTypes from 'prop-types';
 import {Box, FormControl, FormLabel, FormHelperText, Input, Code} from '@chakra-ui/react';
 import {WarningIcon} from '@chakra-ui/icons';
 
-const Output: FC<{ fileData: {} }> = ({fileData}) => {
+const Output: FC<{ fileData: {}, snippets: {} }> = ({fileData}) => {
     console.log(fileData);
     // git remote add origin git@robinpub.github.com:PublicCodeRobin/uix-cloudinary-input.git
     return (
         <Box
-            w={'95%'}
-            maxW={'1200px'}
-            mx={'auto'}
             p={'30px'}
             my={'30px'}
             border={'1px solid black'}
@@ -35,7 +32,7 @@ const Output: FC<{ fileData: {} }> = ({fileData}) => {
 
                     return (
                        <p key={i}>
-                           <Code width={'100%'}>{i===0 ? '' : ''}{name} {val} </Code>
+                           <Code width={'100%'}>{name} {val} </Code>
                        </p>
                     );
                 })}

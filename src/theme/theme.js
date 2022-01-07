@@ -18,14 +18,14 @@ const theme = extendTheme({
       },
 
       defaultProps: {
-        variant: 'outline',
+        colorScheme: 'blue',
+        variant: 'solid',
         size: 'md',
       },
     },
     Heading: {
       baseStyle: {
         fontWeight: 500,
-        textTransform: 'uppercase',
       },
     },
   },

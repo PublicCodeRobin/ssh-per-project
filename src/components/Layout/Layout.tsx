@@ -5,9 +5,10 @@ import {WarningIcon} from '@chakra-ui/icons';
 import HostFile from "../Hostfile/Hostfile";
 import Output from "../Output/Output";
 import GitSnipets from "../GitSnipets/GitSnipets";
+import Introduction from "../Introduction/Introduction";
+import SnippetOut from "../SnippetOut/SnippetOut";
 
 const Layout: FC<{ message?: string }> = (props) => {
-    const {message} = props;
     const [output, setOutput] = useState({});
     const [snippets, setSnippets] = useState({});
 
@@ -22,14 +23,25 @@ const Layout: FC<{ message?: string }> = (props) => {
 
     return (
         <Box
+            w={'95%'}
             maxW={'1200px'}
             mx={'auto'}
         >
-           <HostFile handleSubmit={handleSubmit}/>
+           <Introduction
+            snippets={snippets}
+           />
+           <HostFile
+           handleSubmit={handleSubmit}
+           />
            <Output
+            snippets={snippets}
             fileData={output}
            />
            <GitSnipets handleSubmit={handleSnippetSubmit}/>
+           <SnippetOut
+            snippets={snippets}
+            fileData={output}
+           />
         </Box>
     );
 };

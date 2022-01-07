@@ -55,7 +55,6 @@ console.log({defaultInputs})
 
     return (
         <Box
-            w={'95%'}
             maxW={'1200px'}
             mx={'auto'}
         >
@@ -84,7 +83,7 @@ console.log({defaultInputs})
                                    </FormControl>
                                )
                            })}
-                           <Button type={'submit'}>Add this SSH to config</Button>
+                           <Button colorScheme="green" variant="solid" type={'submit'}>Add this SSH to config</Button>
                        </Flex>
                     </fieldset>
                 </Flex>
