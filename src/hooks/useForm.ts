@@ -18,6 +18,7 @@ export const useForm = (initial = {}) => {
        * console.log(value);
        * @ts-ignore
        */
+      // @ts-ignore
       [outVal] = files  || [];
       break;
     default:

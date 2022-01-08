@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import PropTypes from 'prop-types';
 import { Box, FormControl, FormLabel, FormHelperText, Input, Code } from '@chakra-ui/react';
-import { WarningIcon } from '@chakra-ui/icons';
 
 const Output: FC<{ fileData?: {}, snippets?: {} }> = ({ fileData, snippets }) => {
   console.log(fileData);
