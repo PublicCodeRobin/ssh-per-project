@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import {
   Box,
   ListItem,
-  OrderedList, Code, Heading, UnorderedList, ListIcon
+  OrderedList, Code, Heading, UnorderedList, ListIcon,
 } from '@chakra-ui/react';
-import {WarningIcon} from "@chakra-ui/icons";
+import { WarningIcon } from '@chakra-ui/icons';
 
 const SnippetOut: FC<{ snippets?: {}, fileData?: {}  }> = ({ snippets, fileData }) => {
   console.log('snippets', { snippets });
@@ -21,25 +21,25 @@ const SnippetOut: FC<{ snippets?: {}, fileData?: {}  }> = ({ snippets, fileData 
   const repoLink = `git@${host}:${username}/${repository}`;
 
   return (
-   <Box
-    maxW={'1200px'}
-    mx={'auto'}
-    p={'10px'}
-    bg={'lightslategrey'}
-    color={'white'}
-    borderRadius={'md'}
-    my={'20px'}
-   >
-     <Heading>
+    <Box
+      maxW={'1200px'}
+      mx={'auto'}
+      p={'10px'}
+      bg={'lightslategrey'}
+      color={'white'}
+      borderRadius={'md'}
+      my={'20px'}
+    >
+      <Heading>
        Using your new config file :)
-     </Heading>
-     <OrderedList>
-       <ListItem><WarningIcon/> Add the keys to the agent! You can do it automatically with [this]</ListItem>
-       <ListItem><Code>remote rm {remote}</Code></ListItem>
-       <ListItem><Code>git remote add {remote} {repoLink}</Code></ListItem>
-       <ListItem><Code>git push -u origin {repoLink}</Code></ListItem>
-     </OrderedList>
-   </Box>
+      </Heading>
+      <OrderedList>
+        <ListItem><WarningIcon/> Add the keys to the agent! You can do it automatically with [this]</ListItem>
+        <ListItem><Code>remote rm {remote}</Code></ListItem>
+        <ListItem><Code>git remote add {remote} {repoLink}</Code></ListItem>
+        <ListItem><Code>git push -u origin {repoLink}</Code></ListItem>
+      </OrderedList>
+    </Box>
   );
 };
 
