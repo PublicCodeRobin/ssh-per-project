@@ -1,13 +1,57 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box, FormControl, FormLabel, FormHelperText, Input, Code } from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, FormHelperText, Input, Code, Button } from '@chakra-ui/react';
+// @ts-ignore
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const Output: FC<{ fileData?: {}, snippets?: {} }> = ({ fileData, snippets }) => {
-  console.log(fileData);
   // git remote add origin git@robinpub.github.com:PublicCodeRobin/uix-cloudinary-input.git
-  if (!fileData || !snippets) {
+
+  const [textToCopy, setTextToCopy] = useState('');
+  const [copied, setCopied] = useState(false);
+
+  const hasData = useCallback(() => {
+    const values: string[] = [];
+    if (!!fileData) {
+      Object.values(fileData).forEach((value, i) => {
+        if (typeof value === 'string') {
+          values.push(value);
+        }
+      });
+      if (values.filter(Boolean).length === 0) {
+        return null;
+      }
+      return !!fileData;
+    }
+    return null;
+  }, [fileData]);
+
+  useEffect(() => {
+    setCopied(false);
+    if (!!fileData && hasData()) {
+      const text = Object.entries(fileData)
+        .map(([key, value]) => {
+          if (!key || !value) {
+            return null;
+          }
+          return (
+            `${key} ${value}`
+          );
+        })
+        .filter(Boolean)
+        .join('\n');
+
+      setTextToCopy(text);
+    }
+  }, [fileData, hasData]);
+
+  if (!!fileData) {
+
+  }
+  if (!fileData) {
     return null;
   }
+
   return (
     <Box
       p={'30px'}
@@ -17,7 +61,7 @@ const Output: FC<{ fileData?: {}, snippets?: {} }> = ({ fileData, snippets }) =>
       <Box>
         {
           Object.entries(fileData).map(([key, val], i) => {
-            console.log({ key, val });
+            console.log({ key, val }, '');
             if (!key || !val) {
               return null;
             }
@@ -39,6 +83,12 @@ const Output: FC<{ fileData?: {}, snippets?: {} }> = ({ fileData, snippets }) =>
               </p>
             );
           })}
+        <CopyToClipboard
+          text={textToCopy}
+          onCopy={() => setCopied(true)}
+        >
+          <Button mt={'20px'}>{copied ? 'Copied!' : 'Copy to clipboard'}</Button>
+        </CopyToClipboard>
       </Box>
     </Box>
   );

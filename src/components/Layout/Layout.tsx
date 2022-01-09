@@ -12,15 +12,12 @@ const Layout: FC<{ message?: string }> = (props) => {
   const [output, setOutput] = useState(undefined);
   const [snippets, setSnippets] = useState(undefined);
 
-  const handleSubmit = (e: FormEvent, formValues?: {}) => {
-    e.preventDefault();
-    if (!!formValues) {
-      // @ts-ignore
-      setOutput(formValues);
-    }
+  const handleSubmit = (formValues: {}) => {
+    // @ts-ignore
+    setOutput(formValues);
   };
   const handleSnippetSubmit = (e: FormEvent, formValues: {}) => {
-    e.preventDefault();
+    console.log({ formValues }, 'd');
     // @ts-ignore
     setSnippets(formValues);
   };
