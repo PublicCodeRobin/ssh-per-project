@@ -7,7 +7,7 @@ export const useForm = (initial = {}) => {
 
     const value = userValue || defaultValue;
 
-    let outVal : string | number | null;
+    let outVal : string | number;
 
     switch (type) {
     case 'number' :
