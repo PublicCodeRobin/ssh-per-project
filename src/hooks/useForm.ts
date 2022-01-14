@@ -3,11 +3,9 @@ import React, { useEffect, useState } from 'react';
 export const useForm = (initial = {}) => {
   const [formValues, setInputs] = useState(initial);
   const handleChange = (e : React.FormEvent<HTMLInputElement>) => {
-    const { value: userValue, name, type, files, defaultValue } = e.currentTarget;
+    const { value, name, type, files } = e.currentTarget;
 
-    const value = userValue || defaultValue;
-
-    let outVal : string | number;
+    let outVal : string | number = value;
 
     switch (type) {
     case 'number' :
