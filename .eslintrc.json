@@ -19,7 +19,7 @@
   ],
   "rules": {
     "multiline-comment-style": 1,
-    "react/prop-types": 2,
+    "react/prop-types": 1,
     "react/react-in-jsx-scope": 1,
     "react/jsx-no-target-blank": 1,
     "react/no-find-dom-node": 1,

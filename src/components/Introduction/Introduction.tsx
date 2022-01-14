@@ -1,19 +1,15 @@
-import React, { FC, FormEvent, useState } from 'react';
+import React, { FC } from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
   ListItem,
-  OrderedList, Code, Heading,
+  OrderedList, Code, Heading, Button, Tooltip,
 } from '@chakra-ui/react';
+// @ts-ignore
 
 const Introduction: FC<{ snippets?: {} }> = ({ snippets }) => {
-  console.log('snippets', { snippets });
   // @ts-ignore
   const { email } = snippets || {};
-
-  console.log(email);
-
-  console.log();
 
   return (
     <Box
@@ -29,6 +25,8 @@ const Introduction: FC<{ snippets?: {} }> = ({ snippets }) => {
             Create your keys
       </Heading>
       <OrderedList>
+        <ListItem>
+        </ListItem>
         <ListItem>Make sure ssh-agent is running by typing <Code> eval `ssh-agent`</Code></ListItem>
         <ListItem>Go to ssh folder with terminal or Finder <Code>cd ~/.ssh/</Code></ListItem>
         <ListItem>Create a key <Code>ssh-keygen -t rsa -C {email || '[youremail@example.com]'}</Code> (git wants your email in the token I think)</ListItem>

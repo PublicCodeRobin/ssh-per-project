@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Box, FormControl, FormLabel, FormHelperText, Input, Code, Button } from '@chakra-ui/react';
 // @ts-ignore
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { capitalize } from '../../utils/capitalize';
 
 const Output: FC<{ fileData?: {}, snippets?: {} }> = ({ fileData, snippets }) => {
   // git remote add origin git@robinpub.github.com:PublicCodeRobin/uix-cloudinary-input.git
@@ -35,7 +36,7 @@ const Output: FC<{ fileData?: {}, snippets?: {} }> = ({ fileData, snippets }) =>
             return null;
           }
           return (
-            `${key} ${value}`
+            `${capitalize(key)} ${key === 'IdentityFile' ? `~/.ssh/${value}` : value}`
           );
         })
         .filter(Boolean)
@@ -48,7 +49,7 @@ const Output: FC<{ fileData?: {}, snippets?: {} }> = ({ fileData, snippets }) =>
   if (!!fileData) {
 
   }
-  if (!fileData) {
+  if (!fileData || !hasData()) {
     return null;
   }
 
@@ -66,9 +67,7 @@ const Output: FC<{ fileData?: {}, snippets?: {} }> = ({ fileData, snippets }) =>
               return null;
             }
             // @ts-ignore
-            const [first, ...rest] = [...key];
-            const last = rest.join('');
-            const name = [first.toUpperCase(), last].join('');
+            const name = capitalize(key);
             if (key === 'IdentityFile') {
               return (
                 <p key={i}>
@@ -89,6 +88,9 @@ const Output: FC<{ fileData?: {}, snippets?: {} }> = ({ fileData, snippets }) =>
         >
           <Button mt={'20px'}>{copied ? 'Copied!' : 'Copy to clipboard'}</Button>
         </CopyToClipboard>
+        {!!copied && (
+          <p>Paste the code into your config file 👉 ~/.ssh/config</p>
+        )}
       </Box>
     </Box>
   );

@@ -59,8 +59,6 @@ const HostFile: FC<{ message?: string, handleSubmit: Function }> = (props) => {
     e.preventDefault();
 
     console.log({ formValues }, 'in form');
-    const comb = Object.assign(defaultInputs, formValues);
-    console.log({ comb });
     if (!!formValues) {
       handleSubmit(formValues);
     }
@@ -100,7 +98,7 @@ const HostFile: FC<{ message?: string, handleSubmit: Function }> = (props) => {
                 colorScheme="green"
                 variant="solid"
                 type={'submit'}>
-                 Add this SSH to config
+                 Generate SSH config
               </Button>
             </Flex>
           </fieldset>
