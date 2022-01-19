@@ -19,6 +19,8 @@ const Layout: FC<{ message?: string }> = (props) => {
   const handleSnippetSubmit = (e: FormEvent, formValues: {}) => {
     console.log({ formValues }, 'd');
     // @ts-ignore
+    e.preventDefault();
+    // @ts-ignore
     setSnippets(formValues);
   };
 

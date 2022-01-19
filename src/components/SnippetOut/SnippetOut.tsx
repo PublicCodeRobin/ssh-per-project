@@ -10,7 +10,7 @@ import { WarningIcon } from '@chakra-ui/icons';
 const SnippetOut: FC<{ snippets?: {}, fileData?: {}  }> = ({ snippets, fileData }) => {
   console.log('snippets', { snippets });
   // @ts-ignore
-  const { email  = '[youremail@example.com]', username = '[GitUsername]', repository = '[myrepo].git', remote = '[remote]' } = snippets || {};
+  const { email  = '[youremail@example.com]', username = '[GitUsername]', repository = '[myrepo].git', remote = '[remoteName]' } = snippets || {};
   // @ts-ignore
   const { host = '[hostname]' } = fileData || {};
 
@@ -38,6 +38,7 @@ const SnippetOut: FC<{ snippets?: {}, fileData?: {}  }> = ({ snippets, fileData 
         <ListItem><Code>remote rm {remote}</Code></ListItem>
         <ListItem><Code>git remote add {remote} {repoLink}</Code></ListItem>
         <ListItem><Code>git push -u origin {repoLink}</Code></ListItem>
+        <ListItem><Code>git clone {repoLink}</Code></ListItem>
       </OrderedList>
     </Box>
   );

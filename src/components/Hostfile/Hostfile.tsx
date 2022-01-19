@@ -5,6 +5,7 @@ import { WarningIcon } from '@chakra-ui/icons';
 import { useForm } from '../../hooks/useForm';
 import { EventHandler } from 'framer-motion/types/events/types';
 import Form from '../Form/Form';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const inputConfig = [
   {
@@ -12,7 +13,7 @@ const inputConfig = [
     displayName: 'Host',
     defaultValue: '',
     type: 'text',
-    helperText: '[something].github.com',
+    helperText: 'Will be used in git commands to add repo (git@[HOST.HOST.COM]:[username])',
     placeholder: 'personal.github.com',
   },
   {
@@ -20,7 +21,7 @@ const inputConfig = [
     displayName: 'User',
     defaultValue: '',
     type: 'text',
-    helperText: 'Just put git here. Does not have to be unique',
+    helperText: 'Just put git here.. dunno what happens otherwise',
     placeholder: 'git',
   },
   {
@@ -28,7 +29,7 @@ const inputConfig = [
     displayName: 'Hostname',
     defaultValue: '',
     type: 'text',
-    helperText: 'Just git',
+    helperText: 'Dunno.. recommend to use github.com',
     placeholder: 'github.com',
   },
   {
@@ -36,7 +37,7 @@ const inputConfig = [
     displayName: 'IdentityFile',
     defaultValue: '',
     type: 'text',
-    helperText: 'The filename of the SSH key',
+    helperText: 'The filename of the SSH key created in ~/.ssh/',
     placeholder: 'github_personal',
   },
 ];
@@ -51,8 +52,9 @@ const HostFile: FC<{ message?: string, handleSubmit: Function }> = (props) => {
   const { handleSubmit } = props;
 
   console.log({ defaultInputs });
+  const [saved] = useLocalStorage('hostfile', defaultInputs);
 
-  const { formValues, handleChange } = useForm(defaultInputs);
+  const { formValues, handleChange } = useForm(saved, 'hostfile');
 
   // @ts-ignore
   const submitForm = (e) => {

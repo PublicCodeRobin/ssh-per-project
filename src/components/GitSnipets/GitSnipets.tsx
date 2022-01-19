@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Box, FormControl, FormLabel, FormHelperText, Input, Button, Divider, VStack, Flex } from '@chakra-ui/react';
 import { useForm } from '../../hooks/useForm';
 import Form from '../Form/Form';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const inputConfig = [
   {
@@ -50,7 +51,8 @@ inputConfig.forEach((input) => {
 });
 
 const GitSnippets: FC<{ message?: string, handleSubmit: Function }> = ({ handleSubmit }) => {
-  const { formValues, handleChange } = useForm(defaultInputs);
+  const [saved] = useLocalStorage('snippets', defaultInputs);
+  const { formValues, handleChange } = useForm(saved, 'snippets');
   console.log({ formValues });
 
   return (

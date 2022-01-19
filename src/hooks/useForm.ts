@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useLocalStorage } from './useLocalStorage';
 
-export const useForm = (initial = {}) => {
+export const useForm = (initial = {}, localKey: string) => {
+  const [_, setSaved] = useLocalStorage(localKey);
   const [formValues, setInputs] = useState(initial);
   const handleChange = (e : React.FormEvent<HTMLInputElement>) => {
     const { value, name, type, files } = e.currentTarget;
@@ -26,6 +28,13 @@ export const useForm = (initial = {}) => {
     setInputs((prevState) => {
       return {
         ...prevState,
+        [name]: outVal,
+      };
+    });
+
+    setSaved((prevSaved: any) => {
+      return {
+        ...prevSaved,
         [name]: outVal,
       };
     });
