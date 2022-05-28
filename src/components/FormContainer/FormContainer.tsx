@@ -3,7 +3,7 @@ import { Box, ModalContextProvider, useDisclosure, useModal } from '@chakra-ui/r
 import Introduction from '../Introduction/Introduction';
 import SshConfigFile from '../SshConfigFile/SshConfigFile';
 import FileOut from '../FileOut/FileOut';
-import GitSnipets from '../GitSnipets/GitSnipets';
+import GitSnipets from '../GitSnippets/GitSnippets';
 import GitSnippetOut from '../GitSnippetOut/GitSnippetOut';
 import { defaultFileOut, defaultSnippetOut } from '../../types/FormsOut';
 import BashrcModal from '../BashrcModal/BashrcModal';
