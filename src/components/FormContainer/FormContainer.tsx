@@ -1,12 +1,13 @@
 import React, { FC, FormEvent, useRef, useState } from 'react';
 import { Box, ModalContextProvider, useDisclosure, useModal } from '@chakra-ui/react';
 import Introduction from '../Introduction/Introduction';
-import HostFile from '../Hostfile/Hostfile';
+import SshConfigFile from '../SshConfigFile/SshConfigFile';
 import FileOut from '../FileOut/FileOut';
 import GitSnipets from '../GitSnipets/GitSnipets';
 import GitSnippetOut from '../GitSnippetOut/GitSnippetOut';
 import { defaultFileOut, defaultSnippetOut } from '../../types/FormsOut';
 import BashrcModal from '../BashrcModal/BashrcModal';
+import sshConfigFileForm from '../../forms/sshConfigFileForm';
 
 const FormContainer: FC<{ message?: string }> = (props) => {
   const [output, setOutput] = useState(defaultFileOut);
@@ -35,11 +36,13 @@ const FormContainer: FC<{ message?: string }> = (props) => {
       <BashrcModal
         onClose={onClose}
         isOpen={isOpen}
+        configData={output}
       />
       <Introduction
         email={snippets.email}
       />
-      <HostFile
+      <SshConfigFile
+        formInputs={sshConfigFileForm}
         handleSubmit={handleSubmit}
       />
       {
