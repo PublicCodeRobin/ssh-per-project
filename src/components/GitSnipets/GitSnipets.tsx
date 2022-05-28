@@ -36,7 +36,7 @@ const inputConfig = [
   {
     name: 'remote',
     displayName: 'Remote name',
-    defaultValue: '',
+    defaultValue: 'remote',
     type: 'text',
     value: '',
     helperText: 'how do you want to call the remote (mostly origin)',
@@ -53,7 +53,6 @@ inputConfig.forEach((input) => {
 const GitSnippets: FC<{ message?: string, handleSubmit: Function }> = ({ handleSubmit }) => {
   const [saved] = useLocalStorage('snippets', defaultInputs);
   const { formValues, handleChange } = useForm(saved, 'snippets');
-  console.log({ formValues });
 
   return (
     <Box>
@@ -75,7 +74,9 @@ const GitSnippets: FC<{ message?: string, handleSubmit: Function }> = ({ handleS
                       name={name}
                       type={item.type}
                       onChange={handleChange}
-                      value={value}
+                      {... (
+                        value ? { value } : { value: defaultValue }
+                      )}
                       placeholder={placeholder}
                     />
                     <FormHelperText>{item.helperText}</FormHelperText>
