@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import {
   Box,
   ListItem,
-  OrderedList, Code, Heading, UnorderedList, ListIcon,
+  OrderedList,
+  Code,
+  Heading,
 } from '@chakra-ui/react';
 import { WarningIcon } from '@chakra-ui/icons';
 
@@ -35,7 +37,7 @@ const SnippetOut: FC<{ snippets?: {}, fileData?: {}  }> = ({ snippets, fileData 
       </Heading>
       <OrderedList>
         <ListItem><WarningIcon/> Add the keys to the agent! You can do it automatically with [this]</ListItem>
-        <ListItem><Code>remote rm {remote}</Code></ListItem>
+        <ListItem><Code>git remote rm {remote}</Code></ListItem>
         <ListItem><Code>git remote add {remote} {repoLink}</Code></ListItem>
         <ListItem><Code>git push -u origin {repoLink}</Code></ListItem>
         <ListItem><Code>git clone {repoLink}</Code></ListItem>
