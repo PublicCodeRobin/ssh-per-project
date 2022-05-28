@@ -1,24 +1,27 @@
 import React, { FC, FormEvent, useState } from 'react';
-import PropTypes from 'prop-types';
 import {
   Box,
   ListItem,
   OrderedList,
   Code,
-  Heading,
+  Heading, Button, useModalContext,
 } from '@chakra-ui/react';
 import { WarningIcon } from '@chakra-ui/icons';
+import { SnippetOut } from '../../types/FormsOut';
 
-const SnippetOut: FC<{ snippets?: {}, fileData?: {}  }> = ({ snippets, fileData }) => {
-  console.log('snippets', { snippets });
-  // @ts-ignore
-  const { email  = '[youremail@example.com]', username = '[GitUsername]', repository = '[myrepo].git', remote = '[remoteName]' } = snippets || {};
+
+const GitSnippetOut: FC<
+  {
+    snippets: SnippetOut,
+    fileData?: {},
+    handleModal: Function
+  }
+> = (
+  { snippets, fileData, handleModal }
+) => {
+  const { email, username, repository, remote } = snippets;
   // @ts-ignore
   const { host = '[hostname]' } = fileData || {};
-
-  console.log(email);
-
-  console.log();
 
   const repoLink = `git@${host}:${username}/${repository}`;
 
@@ -36,7 +39,7 @@ const SnippetOut: FC<{ snippets?: {}, fileData?: {}  }> = ({ snippets, fileData 
        Using your new config file :)
       </Heading>
       <OrderedList>
-        <ListItem><WarningIcon/> Add the keys to the agent! You can do it automatically with [this]</ListItem>
+        <ListItem><WarningIcon/> Add the keys to the agent! You can do it automatically with <Button onClick={() => handleModal()} variant="link">Show</Button></ListItem>
         <ListItem><Code>git remote rm {remote}</Code></ListItem>
         <ListItem><Code>git remote add {remote} {repoLink}</Code></ListItem>
         <ListItem><Code>git push -u origin {repoLink}</Code></ListItem>
@@ -46,9 +49,4 @@ const SnippetOut: FC<{ snippets?: {}, fileData?: {}  }> = ({ snippets, fileData 
   );
 };
 
-SnippetOut.propTypes = {
-  snippets: PropTypes.object,
-  fileData: PropTypes.object,
-};
-
-export default SnippetOut;
+export default GitSnippetOut;

@@ -7,9 +7,8 @@ import {
 } from '@chakra-ui/react';
 // @ts-ignore
 
-const Introduction: FC<{ snippets?: {} }> = ({ snippets }) => {
+const Introduction: FC<{ email:string }> = ({ email }) => {
   // @ts-ignore
-  const { email } = snippets || {};
 
   return (
     <Box
@@ -34,10 +33,6 @@ const Introduction: FC<{ snippets?: {} }> = ({ snippets }) => {
       </OrderedList>
     </Box>
   );
-};
-
-Introduction.propTypes = {
-  snippets: PropTypes.object,
 };
 
 export default Introduction;

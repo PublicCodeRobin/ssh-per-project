@@ -62,7 +62,6 @@ const Output: FC<{ fileData?: {}, snippets?: {} }> = ({ fileData, snippets }) =>
       <Box>
         {
           Object.entries(fileData).map(([key, val], i) => {
-            console.log({ key, val }, '');
             if (!key || !val) {
               return null;
             }

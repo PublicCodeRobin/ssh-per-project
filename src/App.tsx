@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Layout from './components/Layout/Layout';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, Modal } from '@chakra-ui/react';
 import theme from './theme/theme';
 
 function App() {

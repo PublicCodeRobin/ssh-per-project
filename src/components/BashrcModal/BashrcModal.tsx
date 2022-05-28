@@ -10,8 +10,7 @@ import {
   ModalOverlay, useDisclosure,
 } from '@chakra-ui/react';
 
-const BashrcModal: React.FC = (props) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+const BashrcModal: React.FC<{isOpen: boolean, onClose: () => void}> = ({ onClose, isOpen }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay/>

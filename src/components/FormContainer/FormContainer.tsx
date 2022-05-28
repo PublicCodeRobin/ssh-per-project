@@ -1,20 +1,23 @@
-import React, { FC, FormEvent, useState } from 'react';
-import { Box } from '@chakra-ui/react';
+import React, { FC, FormEvent, useRef, useState } from 'react';
+import { Box, ModalContextProvider, useDisclosure, useModal } from '@chakra-ui/react';
 import Introduction from '../Introduction/Introduction';
 import HostFile from '../Hostfile/Hostfile';
 import FileOut from '../FileOut/FileOut';
 import GitSnipets from '../GitSnipets/GitSnipets';
 import GitSnippetOut from '../GitSnippetOut/GitSnippetOut';
 import { defaultFileOut, defaultSnippetOut } from '../../types/FormsOut';
+import BashrcModal from '../BashrcModal/BashrcModal';
 
 const FormContainer: FC<{ message?: string }> = (props) => {
   const [output, setOutput] = useState(defaultFileOut);
   const [snippets, setSnippets] = useState(defaultSnippetOut);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleSubmit = (formValues: {}) => {
     // @ts-ignore
     setOutput(formValues);
   };
+
   const handleSnippetSubmit = (e: FormEvent, formValues: {}) => {
     console.log({ formValues }, 'd');
     // @ts-ignore
@@ -29,6 +32,10 @@ const FormContainer: FC<{ message?: string }> = (props) => {
       maxW={'1200px'}
       mx={'auto'}
     >
+      <BashrcModal
+        onClose={onClose}
+        isOpen={isOpen}
+      />
       <Introduction
         email={snippets.email}
       />
@@ -47,6 +54,7 @@ const FormContainer: FC<{ message?: string }> = (props) => {
       {
         !!output && (
           <GitSnippetOut
+            handleModal={onOpen}
             snippets={snippets}
             fileData={output}
           />)
